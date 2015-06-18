@@ -142,6 +142,22 @@ Prefab:
       propertyPath: gravity.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .100000001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
   m_IsPrefabParent: 0
@@ -261,26 +277,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1069408548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dee8f0a0f1e2c3d4ea3fe89b9e7c1224, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c8e0912ff0f4944cab150cc67528b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   k: .5
-  mass: 1
+  mass: 1000
   device_scale: {x: 1, y: 1, z: 1}
+  bodyId: 0
   linearFactors: {x: 1, y: 1, z: 1}
   angularFactors: {x: 1, y: 1, z: 1}
-  springPos: {x: 0, y: 0, z: 0}
-  springOrientation: {x: 0, y: 0, z: 0, w: 1}
-  posConstraintLower: {x: 0, y: 0, z: 0}
-  posConstraintUpper: {x: 0, y: 0, z: 0}
-  orientConstraintCCW: {x: 0, y: 0, z: 0}
-  orientConstraintCW: {x: 0, y: 0, z: 0}
-  max_force: 40
-  dampingFactor: 1
-  friction: 0
-  directionality: 000000000000000000000000000000000000000000000000
-  bodyId: 0
-  springId: 0
+  friction: .800000012
 --- !u!23 &1069408550
 MeshRenderer:
   m_ObjectHideFlags: 0
