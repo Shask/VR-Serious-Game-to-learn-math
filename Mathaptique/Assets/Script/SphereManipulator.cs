@@ -25,14 +25,14 @@ public class SphereManipulator : MonoBehaviour {
 	private bool haveReceivedTipPosition = false;
 	private int receivedCount = 0;
 
-	private GameObject HapticCoord;
-	private Text txt;
+//	private GameObject HapticCoord;
+	//private Text txt;
 	
 	// Use this for initialization
 	void Start () {
 		
-		HapticCoord = GameObject.Find ("HapticCoord");
-		txt = HapticCoord.GetComponent<Text>(); 
+		//HapticCoord = GameObject.Find ("HapticCoord");
+		//txt = HapticCoord.GetComponent<Text>(); 
 
 		savedHapticTipToWorldScale = hapticTipToWorldScale;
 		
@@ -52,7 +52,7 @@ public class SphereManipulator : MonoBehaviour {
 		if (! haveReceivedTipPosition ) {
 			Vector3 posTip2;
 			bool result = FalconUnity.getTipPosition(falcon_num, out posTip2);
-			posTip2.z=-0.5f;
+
 			if(!result){
 //				Debug.Log("Error getting tip position");
 				return;
@@ -102,7 +102,7 @@ public class SphereManipulator : MonoBehaviour {
 //			Debug.Log("Error getting tip position");
 			return;
 		}
-		txt.text=posTip.x + " " +posTip.y+ " "+posTip.z;
+		//txt.text=posTip.x + " " +posTip.y+ " "+posTip.z;
 
 		hapticTip.position = posTip;
 		
