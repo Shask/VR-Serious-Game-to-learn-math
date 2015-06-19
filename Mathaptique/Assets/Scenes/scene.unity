@@ -170,6 +170,14 @@ Prefab:
       propertyPath: hapticTipToWorldScale
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+      propertyPath: constantforce.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+      propertyPath: useMotionCompensator
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
   m_IsPrefabParent: 0
@@ -260,7 +268,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 303042150}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 1.42999995, y: 0, z: 0}
+  m_LocalPosition: {x: 1.42999995, y: 1.01999998, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -296,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   k: .25
-  mass: 1000
+  mass: 1e+14
   device_scale: {x: 1, y: 1, z: 1}
   bodyId: 0
   linearFactors: {x: 1, y: 1, z: 1}
@@ -315,8 +323,8 @@ MeshRenderer:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 3
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
@@ -352,8 +360,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1069408548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .550000012, y: .522000015, z: -.550000012}
-  m_LocalScale: {x: 1, y: 1, z: 1.06860614}
+  m_LocalPosition: {x: .5, y: .522000015, z: -.5}
+  m_LocalScale: {x: .0793870017, y: 3.42160392, z: .899999976}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -444,11 +452,15 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1177624136}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 0, z: -1.09200001}
+  m_LocalPosition: {x: 1.47000003, y: 1.16999996, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!4 &1237959712 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400004, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+  m_PrefabInternal: {fileID: 114646615}
 --- !u!1 &1257494882 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
@@ -463,11 +475,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4286611584
-  m_Size: 1
---- !u!4 &1429843374 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400002, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
-  m_PrefabInternal: {fileID: 114646615}
+  m_Size: .5
 --- !u!1 &1706791094
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +534,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 27
+  field of view: 35
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -548,8 +556,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1706791094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.61999989}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -31.5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
-  m_Father: {fileID: 1429843374}
-  m_RootOrder: 2
+  m_Father: {fileID: 1237959712}
+  m_RootOrder: 0
