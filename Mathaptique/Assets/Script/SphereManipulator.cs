@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+using UnityEngine.UI;
+
 public class SphereManipulator : MonoBehaviour {
 
 	public int falcon_num = 0;
@@ -22,28 +24,35 @@ public class SphereManipulator : MonoBehaviour {
 	
 	private bool haveReceivedTipPosition = false;
 	private int receivedCount = 0;
+
+	private GameObject HapticCoord;
+	private Text txt;
 	
 	// Use this for initialization
 	void Start () {
 		
-		
+		HapticCoord = GameObject.Find ("HapticCoord");
+		txt = HapticCoord.GetComponent<Text>(); 
+
 		savedHapticTipToWorldScale = hapticTipToWorldScale;
 		
 		FalconUnity.setForceField(falcon_num,constantforce);
 		
 		Vector3 tipPositionScale = new Vector3(1,1,-1);
 		tipPositionScale *= hapticTipToWorldScale;
-		
+
 		FalconUnity.updateHapticTransform(falcon_num, transform.position, transform.rotation, tipPositionScale, useMotionCompensator, 1/60.0f);
 			
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+
 		if (! haveReceivedTipPosition ) {
 			Vector3 posTip2;
 			bool result = FalconUnity.getTipPosition(falcon_num, out posTip2);
+			posTip2.z=-0.5f;
 			if(!result){
 //				Debug.Log("Error getting tip position");
 				return;
@@ -67,27 +76,34 @@ public class SphereManipulator : MonoBehaviour {
 		
 		Vector3 tipPositionScale = new Vector3(1,1,-1);
 		tipPositionScale *= hapticTipToWorldScale;
+	
 		
 		if (savedHapticTipToWorldScale != hapticTipToWorldScale) {
 			FalconUnity.setSphereGodObject(falcon_num,godObject.localScale.x * godObject.GetComponent<SphereCollider>().radius, godObjectMass,godObject.position, minDistToMaxForce * hapticTipToWorldScale, maxDistToMaxForce * hapticTipToWorldScale);
 			savedHapticTipToWorldScale = hapticTipToWorldScale;
 			
 		}
-			
+
 		FalconUnity.updateHapticTransform(falcon_num, transform.position, transform.rotation, tipPositionScale, useMotionCompensator, Time.deltaTime);
 		
 		Vector3 posGod;
+
 		bool res = FalconUnity.getGodPosition(falcon_num, out posGod);
 		if(!res){
 //			Debug.Log("Error getting god tip position");
 			return;
 		}
-		Vector3 posTip;
+		Vector3 posTip;	
+	
+
 		res = FalconUnity.getTipPosition(falcon_num, out posTip);
+
 		if(!res){
 //			Debug.Log("Error getting tip position");
 			return;
 		}
+		txt.text=posTip.x + " " +posTip.y+ " "+posTip.z;
+
 		hapticTip.position = posTip;
 		
 		godObject.position = posGod;
