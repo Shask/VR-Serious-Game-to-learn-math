@@ -51,12 +51,12 @@ public class Player : MonoBehaviour {
 			gameObject.transform.Rotate(gameObject.transform.up * 10);
 		}
 
-		if (Input.GetMouseButtonDown(0)) 
+		if (Input.GetMouseButtonDown(0) ||Input.GetKey("e") ) 
 		{
 			GrabItem();
 		}
 
-		if(Input.GetMouseButtonUp(0))
+		if(Input.GetMouseButtonUp(0)||Input.GetKey("r"))
 	 	{
 			DropItem();
 		}
