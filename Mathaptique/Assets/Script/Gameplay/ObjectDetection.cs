@@ -40,7 +40,7 @@ public class ObjectDetection : MonoBehaviour {
             nbCollisions--;
             player.GetComponent<Player>().setcanGrabItem(false);
             player.GetComponent<Player>().setItemInRange(null);
-            col.gameObject.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+            col.gameObject.GetComponent<Renderer>().material.color = col.gameObject.GetComponent<CubeValues>().getDefaultColor();
             Debug.Log("can't grab item anymore");
         }
         

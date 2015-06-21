@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	private bool canGrabItem, isGrabbingItem;
 	private float yPos;
-	private GameObject itemInRange, grabbedItem;
+	private GameObject itemInRange, grabbedItem, buttonInRange;
 	private int nbCollisions;
     private string interactiveTag = "Interactive"; //tag for grabbable items (must be defined into the inspector)
 
@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
 		itemInRange = null;
 		grabbedItem = null;
 		nbCollisions = 0;
+        buttonInRange = null;
 	
 	}
 	
@@ -51,21 +52,45 @@ public class Player : MonoBehaviour {
 			gameObject.transform.Rotate(gameObject.transform.up * 10);
 		}
 
-		if (Input.GetMouseButtonDown(0) ||Input.GetKey("e") ) 
+        //Grab items
+		if (Input.GetMouseButtonDown(0)) 
 		{
 			GrabItem();
 		}
 
-		if(Input.GetMouseButtonUp(0)||Input.GetKey("r"))
+		if(Input.GetMouseButtonUp(0))
 	 	{
 			DropItem();
 		}
+
+        //Right click = click on validation button
+        if (Input.GetMouseButtonDown(1))
+        {
+            if(buttonInRange != null)
+            {
+                Debug.Log("pressing button ");
+                checkPlayerAnswer();
+            }
+
+            else
+            {
+                Debug.Log("There is no button to press here...");
+            }
+            
+        }
 
 		//if the player is grabbing something, keep the item above him
 		if(isGrabbingItem && grabbedItem != null)
 			putItemAbovePlayer();
 	
 	}
+
+    //Verify the answer of the player
+    public void checkPlayerAnswer()
+    {
+        buttonInRange.GetComponent<CheckButtonScript>().push();
+    }
+
 
 	//Grab an item
 	public void GrabItem()
@@ -155,5 +180,10 @@ public class Player : MonoBehaviour {
     public void setItemInRange(GameObject item)
     {
         itemInRange = item;
+    }
+
+    public void setButtonInRange(GameObject button)
+    {
+        buttonInRange = button;
     }
 }
