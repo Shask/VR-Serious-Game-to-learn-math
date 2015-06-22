@@ -1,52 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &108852
+--- !u!1 &133848
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 482064}
-  - 33: {fileID: 3360648}
-  - 65: {fileID: 6574882}
-  - 23: {fileID: 2341100}
-  - 114: {fileID: 11408864}
-  - 54: {fileID: 5424606}
+  - 4: {fileID: 470146}
+  - 33: {fileID: 3368744}
+  - 23: {fileID: 2362158}
+  - 114: {fileID: 11426628}
+  - 65: {fileID: 6569576}
   m_Layer: 0
-  m_Name: Main Wall
+  m_Name: ObjectDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &482064
+--- !u!4 &470146
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108852}
+  m_GameObject: {fileID: 133848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.34000015, y: .522000015, z: -.129999995}
-  m_LocalScale: {x: .0793870017, y: 6.83464956, z: 17.4735565}
+  m_LocalPosition: {x: 0, y: 0, z: 1.07000005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2341100
+--- !u!23 &2362158
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108852}
-  m_Enabled: 1
+  m_GameObject: {fileID: 133848}
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 84b9e1d19d11078d11005b9844295342, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 3
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
@@ -56,58 +55,36 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3360648
+--- !u!33 &3368744
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108852}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5424606
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108852}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &6574882
+  m_GameObject: {fileID: 133848}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &6569576
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108852}
+  m_GameObject: {fileID: 133848}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11408864
+--- !u!114 &11426628
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108852}
+  m_GameObject: {fileID: 133848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8e0912ff0f4944cab150cc67528b4c, type: 3}
+  m_Script: {fileID: 11500000, guid: ecdeaca3a78b9de45b98bafa3a5e1bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  k: .5
-  mass: 10000
-  device_scale: {x: 1, y: 1, z: 1}
-  bodyId: 0
-  linearFactors: {x: 0, y: 0, z: 0}
-  angularFactors: {x: 0, y: 0, z: 0}
-  friction: .800000012
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -117,5 +94,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 108852}
+  m_RootGameObject: {fileID: 133848}
   m_IsPrefabParent: 1

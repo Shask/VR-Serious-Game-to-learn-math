@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ToonBasic
-  m_Shader: {fileID: 4800000, guid: d84268709d11078d11005b9844295342, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9ce107479d11178d11005b9844295342, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -24,9 +24,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: 
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 0, y: 0}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _ToonShade
         second:
-          m_Texture: {fileID: 8900000, guid: b995d4bd9d11078d11005b9844295342, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -36,8 +43,12 @@ Material:
         second: .699999988
       data:
         first:
+          name: 
+        second: 0
+      data:
+        first:
           name: _Outline
-        second: .00701886788
+        second: .00499999989
     m_Colors:
       data:
         first:
@@ -47,6 +58,10 @@ Material:
         first:
           name: _SpecColor
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: 
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _Emission

@@ -8,7 +8,7 @@ public class ObjectDetection : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("GodObject");
 	}
 	
 	// Update is called once per frame
@@ -18,13 +18,14 @@ public class ObjectDetection : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+		int q = 1;
         if (col.gameObject.tag == interactiveTag)
         {
             nbCollisions++;
-            if (!player.GetComponent<Player>().getIsGrabbingItem())
+            if (!player.GetComponent<HapticPlayer>().getIsGrabbingItem())
             {
-                player.GetComponent<Player>().setcanGrabItem(true);
-                player.GetComponent<Player>().setItemInRange(col.gameObject);
+                player.GetComponent<HapticPlayer>().setcanGrabItem(true);
+				player.GetComponent<HapticPlayer>().setItemInRange(col.gameObject);
                 col.gameObject.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
                 Debug.Log("can grab item");
             }
@@ -38,8 +39,8 @@ public class ObjectDetection : MonoBehaviour {
         if (col.gameObject.tag == interactiveTag)
         {
             nbCollisions--;
-            player.GetComponent<Player>().setcanGrabItem(false);
-            player.GetComponent<Player>().setItemInRange(null);
+            player.GetComponent<HapticPlayer>().setcanGrabItem(false);
+			player.GetComponent<HapticPlayer>().setItemInRange(null);
             col.gameObject.GetComponent<Renderer>().material.color = col.gameObject.GetComponent<CubeValues>().getDefaultColor();
             Debug.Log("can't grab item anymore");
         }
