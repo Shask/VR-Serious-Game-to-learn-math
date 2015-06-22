@@ -264,7 +264,7 @@ GameObject:
   - 54: {fileID: 365135302}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,7 +628,7 @@ GameObject:
   - 114: {fileID: 752135002}
   m_Layer: 0
   m_Name: InteractiveObjects
-  m_TagString: Untagged
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -977,6 +977,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1572403259
 Transform:
   m_ObjectHideFlags: 0
@@ -1003,7 +1004,7 @@ GameObject:
   - 54: {fileID: 1773586157}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
