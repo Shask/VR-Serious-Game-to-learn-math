@@ -34,10 +34,10 @@ public class CheckButtonScript : MonoBehaviour {
 
     public void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.name == "Player")
+        if(col.gameObject.name == "GodObject")
         {
             playerInRange = true;
-            col.gameObject.GetComponent<Player>().setButtonInRange(this.gameObject);
+            col.gameObject.GetComponent<HapticPlayer>().setButtonInRange(this.gameObject);
             gameObject.GetComponent<Renderer>().material.color = rangedColor;
         }
     }
@@ -47,7 +47,7 @@ public class CheckButtonScript : MonoBehaviour {
         if (col.gameObject.name == "Player")
         {
             playerInRange = false;
-            col.gameObject.GetComponent<Player>().setButtonInRange(null);
+            col.gameObject.GetComponent<HapticPlayer>().setButtonInRange(null);
             gameObject.GetComponent<Renderer>().material.color = defaultColor;
         }
     }

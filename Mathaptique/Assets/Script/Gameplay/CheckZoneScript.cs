@@ -13,6 +13,7 @@ public class CheckZoneScript : MonoBehaviour {
     private int nbInputs; //nombre d'objets posés dans la zone
     private int maxInputs; //nombre d'inputs max, 1
     private GameObject currentInputObject;
+	private GameController gamectrl;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class CheckZoneScript : MonoBehaviour {
         maxInputs = 1;
         defaultValue = float.MinValue;
         inputValue = defaultValue; // valeur par défaut
+		gamectrl = GameObject.Find ("GameManager").GetComponent<GameController> ();
 	}
 	
 	// Update is called once per frame
@@ -32,17 +34,19 @@ public class CheckZoneScript : MonoBehaviour {
      * */
     public void checkAnswer()
     {
-        Debug.Log("prout");
+      //  Debug.Log("prout");
             if(inputValue != defaultValue)
             {
                 if(inputValue == expectedValue)
                 {
                     Debug.Log("Succès !");
+					gamectrl.FirstStageSucces(true);
                 }
         
                 else
                 {
                     Debug.Log("Echec : Mauvaise valeur !");
+					gamectrl.FirstStageSucces(false);
                 }
             }
 

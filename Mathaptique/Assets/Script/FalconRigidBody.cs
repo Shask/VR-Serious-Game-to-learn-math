@@ -10,6 +10,7 @@ public class FalconRigidBody : MonoBehaviour {
 	public Vector3 linearFactors = new Vector3(1.0f,1.0f,1.0f);
 	public Vector3 angularFactors = new Vector3(1.0f,1.0f,1.0f);
 	public float friction = 0.8f;
+	public bool isGrabbed = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -46,17 +47,51 @@ public class FalconRigidBody : MonoBehaviour {
 	public void FixedUpdate () {
 		Vector3 pos;
 		Quaternion orient;
-		
-		
-		bool res = FalconUnity.getDynamicShapePose(bodyId, out pos, out orient);
-		if(!res){
-//			Debug.Log("Error getting object pose");
-			return;
-		}	
-		transform.localPosition = pos;
-		transform.localRotation = orient;
+		if (!isGrabbed) {
+			bool res = FalconUnity.getDynamicShapePose (bodyId, out pos, out orient);
+			if (!res) {
+				//Debug.Log("Error getting object pose "+ bodyId);
+				return;
+			}	
+			transform.localPosition = pos;
+			transform.localRotation = orient;
+
+		}
 		//FalconUnity.updateDynamicShape(bodyId, mass, k, linearFactors, angularFactors, friction);
+		}
+	public void StopFlippinShit()
+	{
+		linearFactors = new Vector3(0f,0f,0f);
+		angularFactors = new Vector3(0f,0f,0f);
 	}
+	public void LetsFlippinShit()
+	{
+		linearFactors = new Vector3(1.0f,1.0f,1.0f);
+		angularFactors = new Vector3(1.0f,1.0f,1.0f);
+	}
+
+
+	public void DropItem(Transform t)
+	{
+
+		Quaternion orient;
+		Vector3 pos;
+		bool res = FalconUnity.getDynamicShapePose (bodyId,out pos , out orient);
+		transform.position = pos;
+		/*bool res = FalconUnity.getDynamicShapePose (bodyId, out pos, out orient);
+		pos = t.position;
+		//pos.z += 1f;
+		//pos.z == 0.5f;
+		//FalconUnity.sendDynamicShape(bodyId,shape, f.Length/3, mass, k, localPosition, transform.localRotation, linearFactors, angularFactors, friction);
+		Debug.Log (pos);
+		FalconUnity.setDynamicShapePose (bodyId, pos, orient);*/
+		isGrabbed = false;
+		
+		//FalconUnity.sendDynamicShape(bodyId,shape, f.Length/3, mass, k, localPosition, transform.localRotation, linearFactors, angularFactors, friction);
+
+	}
+
+
 	
 	static object Lock = new object();
 	private static int curId = -1;
@@ -66,4 +101,6 @@ public class FalconRigidBody : MonoBehaviour {
 			return curId;
 		}
 	}
+
+
 }

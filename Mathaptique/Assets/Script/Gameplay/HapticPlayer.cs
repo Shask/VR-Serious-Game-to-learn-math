@@ -23,16 +23,7 @@ public class HapticPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		//Keep the object on its original y position
-	/*	if (gameObject.transform.position.y > yPos+0.1 || gameObject.transform.position.y < yPos - 0.1) 
-		{
-			Vector3 fixedPos = new Vector3(gameObject.transform.position.x,yPos,gameObject.transform.position.z);
-			gameObject.transform.position = fixedPos;
-		}
-		*/
-		
-		
+
 		//Grab items
 		if (Input.GetMouseButtonDown(0)) 
 		{
@@ -59,11 +50,17 @@ public class HapticPlayer : MonoBehaviour {
 			}
 			
 		}
+
 		
 		//if the player is grabbing something, keep the item above him
-		if(isGrabbingItem && grabbedItem != null)
-			putItemAbovePlayer();
-		
+		if (isGrabbingItem) {
+			Quaternion orient;
+			FalconRigidBody FalRigidBod = grabbedItem.GetComponent<FalconRigidBody>();
+			Vector3 dec ;
+			FalconUnity.getDynamicShapePose(FalRigidBod.bodyId,out dec,out orient);
+			dec= new Vector3(0,0,0.5f);
+			FalconUnity.setDynamicShapePose (FalRigidBod.bodyId, transform.position + dec , orient);
+		}
 	}
 	
 	//Verify the answer of the player
@@ -80,18 +77,21 @@ public class HapticPlayer : MonoBehaviour {
 		{
 			if(itemInRange != null)
 			{
+
 				//put the item above the player
 				grabbedItem = itemInRange;
 				grabbedItem.transform.parent = gameObject.transform;
 				putItemAbovePlayer();
 				
 				isGrabbingItem = true;
-				Debug.Log("Grabbing item");
+				grabbedItem.GetComponent<FalconRigidBody>().isGrabbed=true;
+				grabbedItem.GetComponent<FalconRigidBody>().StopFlippinShit();
+				//Debug.Log("Grabbing item");
 			}
 			
 			else
 			{
-				Debug.Log("nothing to grab");
+				//Debug.Log("nothing to grab");
 			}
 		}
 	}
@@ -102,18 +102,37 @@ public class HapticPlayer : MonoBehaviour {
 		{
 			if(grabbedItem != null)
 			{
+				Quaternion orient;
+				FalconRigidBody FalRigidBod = grabbedItem.GetComponent<FalconRigidBody>();
+				Vector3 dec ;
+				FalconUnity.getDynamicShapePose(FalRigidBod.bodyId,out dec,out orient);
+				dec= new Vector3(0,0,0.5f);
+			
+
+				FalconUnity.setDynamicShapePose (FalRigidBod.bodyId, transform.position + dec , orient);
+
+
 				grabbedItem.transform.parent = null;
+
+				grabbedItem.GetComponent<FalconRigidBody>().DropItem(transform);
+				grabbedItem.GetComponent<FalconRigidBody>().LetsFlippinShit();
+
+
+
+			//	Vector3 NewPosItem = transform.position;
+			//	NewPosItem.z-=10;
+			//	grabbedItem.transform.position= NewPosItem;
 				//grabbedItem.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward  *1.5f , ForceMode.Impulse);
 				isGrabbingItem = false;
-				Debug.Log("Dropping item");
+				//Debug.Log("Dropping item");
 			}
 		}
 	}
 	
 	public void putItemAbovePlayer()
 	{
-		Vector3 newPos = gameObject.transform.position + gameObject.transform.forward * 2 + Vector3.up;
-		grabbedItem.transform.position = newPos;
+		/*Vector3 newPos = gameObject.transform.position +( gameObject.transform.forward * 2 + Vector3.up)/4;
+		grabbedItem.transform.position = newPos;*/
 	}
 	
 	
