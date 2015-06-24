@@ -33,9 +33,22 @@ public class ObjectDetection : MonoBehaviour {
 				player.GetComponent<HapticPlayer>().setItemInRange(col.gameObject);
                 //col.gameObject.GetComponent<Renderer>().material.color = new Color(125, 0, 0);
 
-				col.gameObject.GetComponent<Renderer>().material.shader = OutlineSelection;
+				Renderer TargetRenderer=null;
+				try
+				{
+					TargetRenderer=col.gameObject.GetComponent<Renderer>();
+				}catch(UnityException e){}
+				if(TargetRenderer.enabled==true)
+				{
+					col.gameObject.GetComponent<Renderer>().material.shader = OutlineSelection;
+				}
+				else 
+				{
+					//col.gameObject.transform.GetChild(0).GetComponentInChildren
+					col.gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.shader=OutlineSelection;
+				}
 				//Color c = col.gameObject.GetComponent<Renderer>().material.GetColor();
-                Debug.Log("can grab item");
+               // Debug.Log("can grab item");
             }
                
         }
@@ -49,8 +62,20 @@ public class ObjectDetection : MonoBehaviour {
             nbCollisions--;
 			player.GetComponent<HapticPlayer>().setcanGrabItem(false);
 			player.GetComponent<HapticPlayer>().setItemInRange(null);
-			col.gameObject.GetComponent<Renderer>().material.shader = col.gameObject.GetComponent<CubeValues>().getShader();
-            Debug.Log("can't grab item anymore");
+			Renderer TargetRenderer=null;
+			try
+			{
+				TargetRenderer=col.gameObject.GetComponent<Renderer>();
+			}catch(UnityException e){}
+			if(TargetRenderer.enabled==true)
+			{
+				TargetRenderer.material.shader = col.gameObject.GetComponent<CubeValues>().getShader();
+			}
+			else 
+			{
+				col.gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.shader=col.gameObject.transform.GetChild(0).GetComponentInChildren<CubeValues>().getShader();
+			}
+          // Debug.Log("can't grab item anymore");
         }
         
     }

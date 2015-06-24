@@ -3,14 +3,17 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	private GameObject Lights;
+	private GameObject[] Lights;
+	private GameObject Light1;
 
 
 	// Use this for initialization
 	void Start () {
 
-		Lights = GameObject.FindGameObjectWithTag ("Level1");
-		Lights.SetActive (false);
+		Lights = GameObject.FindGameObjectsWithTag ("Level1");
+		foreach (GameObject Light1 in Lights) {
+			Light1.SetActive(false);
+		}
 	}
 	
 	// Update is called once per frame
@@ -22,7 +25,9 @@ public class GameController : MonoBehaviour {
 	{
 		if (succes) {
 		
-			Lights.SetActive(true);
+			foreach (GameObject Light1 in Lights) {
+				Light1.SetActive(true);
+			}
 		} else {
 		
 

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactive
+  - Level1
+  - HitBoxOnly
   layers:
   - Default
   - TransparentFX

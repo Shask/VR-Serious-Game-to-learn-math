@@ -14,14 +14,16 @@ public class CheckZoneScript : MonoBehaviour {
     private int maxInputs; //nombre d'inputs max, 1
     private GameObject currentInputObject;
 	private GameController gamectrl;
+	private HapticPlayer Player;
 
 	// Use this for initialization
 	void Start () {
         inputExists = true;
-        maxInputs = 1;
+        maxInputs = 10000;
         defaultValue = float.MinValue;
         inputValue = defaultValue; // valeur par défaut
 		gamectrl = GameObject.Find ("GameManager").GetComponent<GameController> ();
+		Player = GameObject.Find ("GodObject").GetComponent<HapticPlayer> ();
 	}
 	
 	// Update is called once per frame
@@ -59,38 +61,45 @@ public class CheckZoneScript : MonoBehaviour {
     public void OnTriggerEnter(Collider col)
     {
         //Regarder si objet dans le trigger = objet interactif (cube de réponse)
-        if (col.gameObject.tag == interactiveTag)
-        {
-            nbInputs++;
+	        if (col.gameObject.tag == interactiveTag) {
+				if (Player.isItGrabbedItem (col.gameObject)) {
+					Player.DropItem();
+					col.transform.position = transform.position;
+					col.transform.rotation = new Quaternion(0,190,0,0);
+					FalconUnity.setDynamicShapePose (col.GetComponent<FalconRigidBody>().bodyId, transform.position , col.transform.rotation);
+					FalconUnity.Update();
 
-            if(nbInputs == maxInputs)
-            {
-                currentInputObject = col.gameObject;
-                inputValue = currentInputObject.GetComponent<CubeValues>().getValue();
-                Debug.Log("received a new value : " + inputValue);
-            }
+	         	   //nbInputs++;
 
-            //Si trop d'objets dans la zone de réponse, aucun input accepté
-            else
-            {
-                currentInputObject = null;
-                inputValue = float.MinValue;
-                Debug.Log("too many values !");
-            }
-        }
-    }
+	            /*if(nbInputs == maxInputs)
+	            {*/
+	                currentInputObject = col.gameObject;
+	                inputValue = currentInputObject.GetComponent<CubeValues>().getValue();
+	           /*     Debug.Log("received a new value : " + inputValue);
+	            }
+
+	            //Si trop d'objets dans la zone de réponse, aucun input accepté
+	            else
+	            {
+	                currentInputObject = null;
+	                inputValue = float.MinValue;
+	                Debug.Log("too many values !");
+	            }*/
+	        }
+		}
+   }
 
     public void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == interactiveTag)
+     /*   if (col.gameObject.tag == interactiveTag)
         {
-            nbInputs--;
+          //  nbInputs--;
             if(nbInputs < maxInputs)
             {
                 currentInputObject = null;
                 inputValue = float.MinValue;
                 Debug.Log("input value left the zone");
             }
-        }
+        }*/
     }
 }

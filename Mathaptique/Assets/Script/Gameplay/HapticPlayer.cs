@@ -7,8 +7,11 @@ public class HapticPlayer : MonoBehaviour {
 	private GameObject itemInRange, grabbedItem, buttonInRange;
 	private int nbCollisions;
 	private string interactiveTag = "Interactive"; //tag for grabbable items (must be defined into the inspector)
-	
-	
+	private SphereManipulator SM;
+
+	private float CooldownTimerGrab = 1.0f;
+
+
 	// Use this for initialization
 	void Start () {
 		canGrabItem = false;
@@ -18,25 +21,29 @@ public class HapticPlayer : MonoBehaviour {
 		grabbedItem = null;
 		nbCollisions = 0;
 		buttonInRange = null;
+		SM = GameObject.Find ("Falcon").GetComponent<SphereManipulator>();
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+		CooldownTimerGrab -= Time.deltaTime;
 		//Grab items
-		if (Input.GetMouseButtonDown(0)) 
+		//
+		//Input.GetMouseButtonDown(0)
+		if (SM.button_states[0] && CooldownTimerGrab<=0) 
 		{
 			GrabItem();
 		}
 		
-		if(Input.GetMouseButtonUp(0))
+		if(!SM.button_states[0] && isGrabbingItem)
 		{
 			DropItem();
 		}
 		
 		//Right click = click on validation button
-		if (Input.GetMouseButtonDown(1))
+		if (SM.button_states[1])
 		{
 			if(buttonInRange != null)
 			{
@@ -98,6 +105,7 @@ public class HapticPlayer : MonoBehaviour {
 	
 	public void DropItem()
 	{
+		CooldownTimerGrab = 1.0f;
 		if (isGrabbingItem) 
 		{
 			if(grabbedItem != null)
@@ -179,5 +187,11 @@ public class HapticPlayer : MonoBehaviour {
 	public void setButtonInRange(GameObject button)
 	{
 		buttonInRange = button;
+	}
+	public bool isItGrabbedItem(GameObject go)
+	{
+		if (grabbedItem == go)
+			return true;
+		return false;
 	}
 }

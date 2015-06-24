@@ -77,7 +77,7 @@ public class FalconRigidBody : MonoBehaviour {
 		Quaternion orient;
 		Vector3 pos;
 		bool res = FalconUnity.getDynamicShapePose (bodyId,out pos , out orient);
-		transform.position = pos;
+		transform.position = pos + new Vector3(0,0,0.5f);
 		/*bool res = FalconUnity.getDynamicShapePose (bodyId, out pos, out orient);
 		pos = t.position;
 		//pos.z += 1f;
