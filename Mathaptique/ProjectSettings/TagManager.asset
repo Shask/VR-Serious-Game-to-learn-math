@@ -15,6 +15,7 @@ TagManager:
   - ValidationButton
   - Level3
   - Fan
+  - Level4
   layers:
   - Default
   - TransparentFX

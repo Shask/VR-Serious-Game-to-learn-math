@@ -10,7 +10,10 @@ public class HapticPlayer : MonoBehaviour {
 	private string interactiveTag = "Interactive"; //tag for grabbable items (must be defined into the inspector)
 	private SphereManipulator SM;
 
-	private float CooldownTimerGrab = 1.0f;
+	private float CooldownTimerGrab = 0.5f;
+
+	private bool canRotate = true;
+	public GameObject currentTriggerZoneIn;
 
 
 	// Use this for initialization
@@ -63,7 +66,19 @@ public class HapticPlayer : MonoBehaviour {
 					interButtonInRange.GetComponent<ComputerRiddleButton>().press();
 				}
 			}
+			if (canRotate)
+			{
+				rotateIemRight(true);
+			}
 			
+		}else if (!SM.button_states [1]) {
+			rotateIemRight(false);
+		}
+
+		if (SM.button_states [3]) {
+			rotateIemLeft(true);
+		} else if (!SM.button_states [3]) {
+			rotateIemLeft(false);
 		}
 
 		
@@ -211,6 +226,43 @@ public class HapticPlayer : MonoBehaviour {
 	public void setInterracButtonInRange(GameObject button)
 	{
 		interButtonInRange = button;
+	}
+
+	//PARTIE TURBINE
+	//Faire rotater l'item dans le sens des aiguilles d'une montre
+	public void rotateIemLeft(bool doRotate)
+	{
+		if(currentTriggerZoneIn != null)
+		{
+			if(doRotate)
+				currentTriggerZoneIn.GetComponent<TurbineTrigger>().rotatingItem.GetComponent<Rotator>().setRotateClockWise(true);
+			
+			else
+			{
+				currentTriggerZoneIn.GetComponent<TurbineTrigger>().rotatingItem.GetComponent<Rotator>().setRotateClockWise(false);
+			}
+			
+		}
+	}
+	
+	//Faire rotater l'item dans le sens des aiguilles d'une montre
+	public void rotateIemRight(bool doRotate)
+	{
+		if (currentTriggerZoneIn != null)
+		{
+			if (doRotate)
+				currentTriggerZoneIn.GetComponent<TurbineTrigger>().rotatingItem.GetComponent<Rotator>().setRotateCounterClockWise(true);
+			
+			else
+			{
+				currentTriggerZoneIn.GetComponent<TurbineTrigger>().rotatingItem.GetComponent<Rotator>().setRotateCounterClockWise(false);
+			}
+		}
+	}
+	
+	public void setCanRotate(bool val)
+	{
+		canRotate = val;
 	}
 
 

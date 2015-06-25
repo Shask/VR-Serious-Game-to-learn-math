@@ -10,12 +10,15 @@ public class ComputerRiddleCheck : MonoBehaviour {
 	private float timerClic = 1.0f;
 	private bool canClic = true;
 
+	private GameController gamectrl;
+
 	private bool succeded = false;
 
 	// Use this for initialization
 	void Start () {
 		Result = GameObject.Find ("Result").GetComponent<TextMesh>();
 		Enonce = GameObject.Find ("Enoncé").GetComponent<TextMesh>();
+		gamectrl = GameObject.Find ("GameManager").GetComponent<GameController> ();
 	}
 	
 	// Update is called once per frame
@@ -35,7 +38,9 @@ public class ComputerRiddleCheck : MonoBehaviour {
 				Enonce.text="Bravo !\r\n"+"Merci pour votre participation a\r\n" + 
 					"la destruction de la race humaine";
 				Enonce.characterSize=2;
-				Result.gameObject.transform.GetComponentInChildren<Renderer>().material=Resources.Load("3dTextVert",typeof(Material)) as Material;;
+				Result.gameObject.transform.GetComponentInChildren<Renderer>().material=Resources.Load("3dTextVert",typeof(Material)) as Material;
+				gamectrl.ThridStageSucces(true);
+			//	GameObject instance = Instantiate(Resources.Load("Fireworkslvl3", typeof(GameObject))) as GameObject;
 
 			} else {
 				Debug.Log("Failed");

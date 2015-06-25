@@ -25,12 +25,12 @@ public class Rotator : MonoBehaviour {
         //sens horaire
         if(rotateClockWise)
         {
-             transform.Rotate (0,0,rotateSpeed * Time.deltaTime);
+			transform.Rotate (rotateSpeed * Time.deltaTime,0,0);
         }
 
         else if (rotateCounterClockWise)
         {
-            transform.Rotate(0, 0, -rotateSpeed * Time.deltaTime); 
+			transform.Rotate( -rotateSpeed * Time.deltaTime, 0,0); 
         }
 
 	

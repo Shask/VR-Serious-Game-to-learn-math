@@ -6,7 +6,7 @@ public class ComputerRiddleButton : MonoBehaviour {
 
 	public bool isPlus;
 	private TextMesh Result;
-	private float timerClic = 0.5f;
+	private float timerClic = 0.2f;
 
 	private bool canClic = true;
 	// Use this for initialization

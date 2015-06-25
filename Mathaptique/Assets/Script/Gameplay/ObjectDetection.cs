@@ -16,6 +16,7 @@ public class ObjectDetection : MonoBehaviour {
 	void Start () {
 		player = GameObject.Find("GodObject");
 		OutlineSelection= Shader.Find ("Toon/Basic Outline");
+
 	}
 	
 	// Update is called once per frame

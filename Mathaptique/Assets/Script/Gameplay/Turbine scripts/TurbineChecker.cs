@@ -10,20 +10,26 @@ public class TurbineChecker : MonoBehaviour {
     private Color originalColor;
     private int numberOfValidators; //nombre d'objets (indicators) qui doivent servir à valider la condition finale
 
+	private GameController gameController;
+	public GameObject[] ListBoxResult;
+
+	public GameObject[] ListFan;
+	
+
 	// Use this for initialization
 	void Start () {
         allValid = false;
-        originalColor = new Color(255, 0, 0);
-        foreach (Transform child in transform)
-        {
-            numberOfValidators++; //les indicateurs doivent être enfants de cet objet, on les compte
-        }
+		numberOfValidators = 4; 
+		if (ListBoxResult == null)
+			ListBoxResult = GameObject.FindGameObjectsWithTag("ResultBoxFan");
+		gameController= GameObject.Find ("GameManager").GetComponent<GameController> ();
+		ListFan = GameObject.FindGameObjectsWithTag("Fan");
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		if(!allValid)
         checkAllIndicators();
 	
 	}
@@ -34,29 +40,53 @@ public class TurbineChecker : MonoBehaviour {
     public void checkAllIndicators()
     {
         int currentValidIndicators = 0;
-        foreach (Transform child in transform)
+       /* foreach (Transform child in transform)
         {
             if(child.gameObject.GetComponent<IndicatorTrigger>().getIsValid())
             {
                 currentValidIndicators++;     
             }         
-        }
+        }*/
+		foreach (GameObject BoxResult1 in ListBoxResult) {
+			if(BoxResult1.GetComponent<IndicatorTrigger>().getIsValid())
+				currentValidIndicators++; 
+		}
+
+	
 
         if(currentValidIndicators == numberOfValidators)
         {
             allValid = true;
-            gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+            //gameObject.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+			gameController.FourthStageSucces(true);
             Debug.Log("All conditions are OK");
+			succededLevel();
         }
 
 
         else
         {
             allValid = false;
-            if (gameObject.GetComponent<Renderer>().material.color != originalColor)
-            {
-                gameObject.GetComponent<Renderer>().material.color = originalColor;
-            }
+            
         }
     }
+	public void succededLevel()
+	{
+		foreach (GameObject Fan in ListFan) {
+			Animation FanAnim;
+			FanAnim = Fan.GetComponent<Animation> ();
+			foreach (AnimationState state in FanAnim) {
+				state.speed = 20F;
+			}
+			FanAnim.Play ();
+
+			for(int i=0; i< Fan.transform.childCount; i++)
+			{
+				GameObject child = Fan.transform.GetChild(i).gameObject;
+				if(child != null)
+					child.SetActive(false);
+			} 
+
+		}
+	}
 }
