@@ -6,6 +6,9 @@ public class QuestReader : MonoBehaviour {
 	public float timer=15.0f;
 	private bool timerStart = false;
 	private bool alreadyPlayed = false;
+	private bool succeded = false;
+
+	private bool justFailed = false;
 
 	public string text0;
 	public string text1;
@@ -14,10 +17,14 @@ public class QuestReader : MonoBehaviour {
 	public string text4;
 	public string textFinal;
 
+	public string textSucces;
+	public string textFailure;
+
 	private TextMesh textMesh;
 	private Vector3 textMeshInitPos;
 	private Vector3 textMeshInitScale;
 	private GameObject TextMeshGO;
+
 
 
 
@@ -33,6 +40,8 @@ public class QuestReader : MonoBehaviour {
 		text3 = text3.Replace("nwl","\r\n");
 		text4 = text4.Replace("nwl","\r\n");
 		textFinal = textFinal.Replace("nwl","\r\n");
+		textFailure = textFailure.Replace("nwl","\r\n");
+		textSucces = textSucces.Replace("nwl","\r\n");
 
 	}
 	
@@ -42,7 +51,7 @@ public class QuestReader : MonoBehaviour {
 
 			timer -= Time.deltaTime;
 			
-			if(!alreadyPlayed)
+			if(!alreadyPlayed && !succeded)
 			{
 				if (timer > 13.0f) {
 					textMesh.text = text1;
@@ -63,7 +72,7 @@ public class QuestReader : MonoBehaviour {
 					StopTalking();
 				}
 			}
-			else 
+			else if(!succeded)
 			{
 				if (timer > 5.0f) {
 					textMesh.text = textFinal;
@@ -74,15 +83,24 @@ public class QuestReader : MonoBehaviour {
 					textMesh.text = text0;
 					StopTalking();
 				}
+			}else if(justFailed && timer<5.0f)
+			{
+				timerStart = false;
+				textMesh.text = text0;
+				StopTalking();
+				justFailed=false;
 			}
 		}
 	
 	}
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Player") {
+			if(!other.gameObject.GetComponentInChildren<HapticPlayer>().getIsGrabbingItem() )
+			{
 			timerStart=true;
 			Talk ();
 			timer = 15.0f;
+			}
 		}
 
 	}
@@ -96,6 +114,19 @@ public class QuestReader : MonoBehaviour {
 	{
 		TextMeshGO.transform.localPosition=textMeshInitPos;
 		TextMeshGO.transform.localScale= textMeshInitScale;
+	}
+
+	public void BurnDaughter()
+	{
+		Talk ();
+		textMesh.text = textSucces;
+		succeded = true;
+	}
+	public void BurnDaughterFail()
+	{
+		justFailed = true;
+		Talk ();
+		textMesh.text = textFailure;
 	}
 
 

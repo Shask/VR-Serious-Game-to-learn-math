@@ -7,6 +7,14 @@ TagManager:
   - Interactive
   - Level1
   - HitBoxOnly
+  - interactive
+  - Fire
+  - Level2
+  - Stannis
+  - Button
+  - ValidationButton
+  - Level3
+  - Fan
   layers:
   - Default
   - TransparentFX

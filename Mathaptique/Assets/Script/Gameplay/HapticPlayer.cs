@@ -5,6 +5,7 @@ public class HapticPlayer : MonoBehaviour {
 	private bool canGrabItem, isGrabbingItem;
 	private float yPos;
 	private GameObject itemInRange, grabbedItem, buttonInRange;
+	private GameObject interButtonInRange;
 	private int nbCollisions;
 	private string interactiveTag = "Interactive"; //tag for grabbable items (must be defined into the inspector)
 	private SphereManipulator SM;
@@ -22,7 +23,8 @@ public class HapticPlayer : MonoBehaviour {
 		nbCollisions = 0;
 		buttonInRange = null;
 		SM = GameObject.Find ("Falcon").GetComponent<SphereManipulator>();
-		
+
+		interButtonInRange=null;
 	}
 	
 	// Update is called once per frame
@@ -51,9 +53,15 @@ public class HapticPlayer : MonoBehaviour {
 				checkPlayerAnswer();
 			}
 			
-			else
+			if(interButtonInRange!= null)
 			{
-				Debug.Log("There is no button to press here...");
+				if(interButtonInRange.tag=="ValidationButton")
+				{
+					interButtonInRange.GetComponent<ComputerRiddleCheck>().checkResult();
+				}
+				else{
+					interButtonInRange.GetComponent<ComputerRiddleButton>().press();
+				}
 			}
 			
 		}
@@ -194,4 +202,18 @@ public class HapticPlayer : MonoBehaviour {
 			return true;
 		return false;
 	}
+
+	//BUTTONS
+
+	
+
+	
+	public void setInterracButtonInRange(GameObject button)
+	{
+		interButtonInRange = button;
+	}
+
+
+
+
 }

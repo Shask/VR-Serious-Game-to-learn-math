@@ -5,6 +5,8 @@ public class ObjectDetection : MonoBehaviour {
     GameObject player;
     private int nbCollisions, maxCollisions;
     private string interactiveTag = "Interactive";
+	private string buttonTag="Button"; 
+	private string buttonActivationTag="ValidationButton"; 
 	private Shader OutlineSelection;
 
 
@@ -52,6 +54,26 @@ public class ObjectDetection : MonoBehaviour {
             }
                
         }
+		if (col.gameObject.tag == buttonTag || col.gameObject.tag == buttonActivationTag) {
+
+			player.GetComponent<HapticPlayer>().setInterracButtonInRange(col.gameObject);
+			
+
+			Renderer TargetRenderer=null;
+			try
+			{
+				TargetRenderer=col.gameObject.GetComponent<Renderer>();
+			}catch(UnityException e){}
+			if(TargetRenderer.enabled==true)
+			{
+				col.gameObject.GetComponent<Renderer>().material.shader = OutlineSelection;
+			}
+			else 
+			{
+				//col.gameObject.transform.GetChild(0).GetComponentInChildren
+				col.gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.shader=OutlineSelection;
+			}
+		}
         
     }
 
@@ -77,6 +99,21 @@ public class ObjectDetection : MonoBehaviour {
 			}
           // Debug.Log("can't grab item anymore");
         }
-        
-    }
+		else if (col.gameObject.tag == buttonTag || col.gameObject.tag == buttonActivationTag) {
+			player.GetComponent<HapticPlayer>().setInterracButtonInRange(null);
+			Renderer TargetRenderer=null;
+			try
+			{
+				TargetRenderer=col.gameObject.GetComponent<Renderer>();
+			}catch(UnityException e){}
+			if(TargetRenderer.enabled==true)
+			{
+				TargetRenderer.material.shader = col.gameObject.GetComponent<CubeValues>().getShader();
+			}
+			else 
+			{
+				col.gameObject.transform.GetChild(0).GetComponentInChildren<Renderer>().material.shader=col.gameObject.transform.GetChild(0).GetComponentInChildren<CubeValues>().getShader();
+			}
+		}
+	}
 }
