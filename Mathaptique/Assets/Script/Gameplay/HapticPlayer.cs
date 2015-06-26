@@ -144,9 +144,9 @@ public class HapticPlayer : MonoBehaviour {
 
 
 				grabbedItem.transform.parent = null;
-
-				grabbedItem.GetComponent<FalconRigidBody>().DropItem(transform);
-				grabbedItem.GetComponent<FalconRigidBody>().LetsFlippinShit();
+				grabbedItem.GetComponent<FalconRigidBody>().enabled=false;
+				//grabbedItem.GetComponent<FalconRigidBody>().DropItem(transform);
+			//	grabbedItem.GetComponent<FalconRigidBody>().LetsFlippinShit();
 
 
 

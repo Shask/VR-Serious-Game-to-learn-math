@@ -46,6 +46,7 @@ public class AutoCheckZone : MonoBehaviour {
 			{
 				Debug.Log("Echec : Mauvaise valeur !");
 				gamectrl.FirstStageSucces(false);
+
 			}
 		}
 		
@@ -71,6 +72,7 @@ public class AutoCheckZone : MonoBehaviour {
 			{
 				Debug.Log("Echec : Mauvaise valeur !");
 				gamectrl.SecondStageSucces(false);
+				gameObject.GetComponent<AudioSource>().Play();
 			}
 		}
 		

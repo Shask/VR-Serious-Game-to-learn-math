@@ -16,6 +16,7 @@ TagManager:
   - Level3
   - Fan
   - Level4
+  - StannisObj
   layers:
   - Default
   - TransparentFX

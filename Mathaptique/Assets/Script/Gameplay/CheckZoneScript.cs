@@ -49,6 +49,8 @@ public class CheckZoneScript : MonoBehaviour {
                 {
                     Debug.Log("Echec : Mauvaise valeur !");
 					gamectrl.FirstStageSucces(false);
+					gameObject.GetComponent<AudioSource>().Play();
+
                 }
             }
 

@@ -43,6 +43,7 @@ public class ComputerRiddleCheck : MonoBehaviour {
 			//	GameObject instance = Instantiate(Resources.Load("Fireworkslvl3", typeof(GameObject))) as GameObject;
 
 			} else {
+				gameObject.GetComponent<AudioSource>().Play();
 				Debug.Log("Failed");
 
 			}

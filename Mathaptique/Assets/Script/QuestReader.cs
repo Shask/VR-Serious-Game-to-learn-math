@@ -25,6 +25,8 @@ public class QuestReader : MonoBehaviour {
 	private Vector3 textMeshInitScale;
 	private GameObject TextMeshGO;
 
+	private AudioSource StannisSucces;
+
 
 
 
@@ -42,6 +44,8 @@ public class QuestReader : MonoBehaviour {
 		textFinal = textFinal.Replace("nwl","\r\n");
 		textFailure = textFailure.Replace("nwl","\r\n");
 		textSucces = textSucces.Replace("nwl","\r\n");
+
+		StannisSucces = GameObject.FindWithTag ("StannisObj").GetComponent<AudioSource>();
 
 	}
 	
@@ -95,6 +99,7 @@ public class QuestReader : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Player") {
+			gameObject.GetComponent<AudioSource>().Play();
 			if(!other.gameObject.GetComponentInChildren<HapticPlayer>().getIsGrabbingItem() )
 			{
 			timerStart=true;
@@ -107,6 +112,7 @@ public class QuestReader : MonoBehaviour {
 
 	public void Talk()
 	{
+
 		TextMeshGO.transform.localPosition=new Vector3(1.0f,1.2f,0.3f);
 		TextMeshGO.transform.localScale= new Vector3(0.05f,0.05f,0.05f);
 	}
@@ -118,6 +124,7 @@ public class QuestReader : MonoBehaviour {
 
 	public void BurnDaughter()
 	{
+		StannisSucces.Play ();
 		Talk ();
 		textMesh.text = textSucces;
 		succeded = true;
